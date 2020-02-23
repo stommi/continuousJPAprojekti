@@ -1,13 +1,20 @@
 package fi.academy.continuousjpaviikkoprojekti;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Topic {
 
     @Id
+    @GeneratedValue(strategy = IDENTITY,
+            generator = "topic_id_seq")
+    @SequenceGenerator(name = "topic_id_seq",
+            sequenceName = "topic_id_seq",
+            allocationSize = 1)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
     private String title;
     private String description;
